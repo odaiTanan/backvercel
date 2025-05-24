@@ -1,6 +1,5 @@
 import express from "express";
 import { dbConnection } from "./database/dbConnection.js";
-import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import fileUpload from "express-fileupload";
@@ -13,16 +12,18 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
-    method: ["GET", "POST", "DELETE", "PUT"],
+    origin: true, // يعكس origin المرسل تلقائيًا
     credentials: true,
+    methods: ["GET", "POST", "DELETE", "PUT"],
   })
 );
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.get("/", (req, res) => {
+  res.send("✅ API is running on Vercel!");
+});
 app.use(
   fileUpload({
     useTempFiles: true,
