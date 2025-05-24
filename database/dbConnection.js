@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 export const dbConnection = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+  await mongoose
+    .connect(
+      "mongodb+srv://odeartanan:odaitanan@cluster0.q65mrun.mongodb.net/",
+      {
+        dbName: "MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM",
+      }
+    )
+    .then(() => {
+      console.log("Connected to database!");
+    })
+    .catch((err) => {
+      console.log("Some error occured while connecting to database:", err);
     });
-    console.log("✅ Connected to MongoDB");
-  } catch (err) {
-    console.error("❌ MongoDB connection error:", err.message);
-    process.exit(1);
-  }
 };
