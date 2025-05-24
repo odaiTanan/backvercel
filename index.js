@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: true, // يعكس origin المرسل تلقائيًا
+    origin: ["https://medicalcenter.vercel.app"], // يعكس origin المرسل تلقائيًا
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
   })
