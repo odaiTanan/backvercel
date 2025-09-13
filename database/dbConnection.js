@@ -1,18 +1,22 @@
 import mongoose from "mongoose";
 
-export const dbConnection = async () => {
-  try {
-    await mongoose.connect(
-      "mongodb+srv://odeartanan:odaitanan@cluster0.q65mrun.mongodb.net/MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+export const dbConnection = () => {
+  // Use MONGO_URI instead of MONGODB_URI
+  const connectionString = process.env.MONGO_URI || "mongodb+srv://odeartanan:odaitanan@cluster0.q65mrun.mongodb.net/";
 
-    console.log("✅ Connected to MongoDB!");
-  } catch (err) {
-    console.error("❌ Error connecting to MongoDB:", err.message);
-    process.exit(1); // ينهي التطبيق إذا فشل الاتصال
-  }
+  mongoose.connect(connectionString, {
+    serverSelectionTimeoutMS: 5000,
+  });
+
+  mongoose.connection.on("connected", () => {
+    console.log("✅ Connected to MongoDB successfully");
+  });
+
+  mongoose.connection.on("error", (err) => {
+    console.error("❌ MongoDB connection error:", err);
+  });
+
+  mongoose.connection.on("disconnected", () => {
+    console.log("🔌 MongoDB disconnected");
+  });
 };
