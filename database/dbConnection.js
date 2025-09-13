@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const dbConnection = () => {
   // Use MONGO_URI instead of MONGODB_URI
-  const connectionString = process.env.MONGO_URI || "mongodb+srv://odeartanan:odaitanan@cluster0.q65mrun.mongodb.net/";
+  const connectionString = process.env.MONGO_URI || "mongodb+srv://odeartanan:odaitanan@cluster0.q65mrun.mongodb.net/MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM";
 
   mongoose.connect(connectionString, {
     serverSelectionTimeoutMS: 5000,
