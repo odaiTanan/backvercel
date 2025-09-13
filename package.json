@@ -8,7 +8,7 @@
   },
   "author": "",
   "engines": {
-    "node": "v18.20.8"
+    "node": "v22.18.0"
   },
   "license": "ISC",
   "dependencies": {
